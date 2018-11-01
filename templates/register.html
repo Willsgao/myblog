@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+		<meta charset="utf-8">
+		<link href="css/login_reglogin.css" rel='stylesheet' type='text/css' />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+		<div class="bg">
+				<img src="images/c.jpg" alt="">
+			</div>
+	<div class="main">
+		<div class="header" >
+			<h1>创建一个新账户！</h1>
+		</div>
+		<p></p>
+			<form action="#" method="post">
+				<ul class="left-form">
+					<h2>新账户:</h2>
+					<li>
+            <input type="text" name="username" placeholder="请输入用户名" required/>
+						<div class="clear"> </div>
+					</li> 
+					<li>
+            <input type="email" name="email" placeholder="请输入邮箱" required/>
+						<div class="clear"> </div>
+					</li> 
+					<li>
+            <input type="url" name="url" placeholder="请输入个人主站地址" required/>
+						<div class="clear"> </div>
+					</li> 
+					<li>
+            <input type="password" name="password" placeholder="请输入密码" required/>
+						<div class="clear"> </div>
+          </li>
+          <li>
+              <input type="password" name="password" placeholder="请再次确认密码" required/>
+              <div class="clear"> </div>
+            </li>
+					<!--用于记录注册跳转来源，方便注册之后跳转之前的页面-->
+          <input type="hidden" name="source_url" value="{{ request.META.HTTP_REFERER }}">
+					<input type="submit" value="创建并登录">
+					<div class="clear"> </div>
+				</ul>
+				<div class="clear"> </div>
+			</form>
+	</div>
+</body>
+</html>
