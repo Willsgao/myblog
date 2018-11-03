@@ -3,19 +3,19 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>首页_皮爷の博客</title>
+	<title>蜗牛行天下の博客</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="shortcut icon" href="images/bitbug_favicon.ico" type="image/x-icon" />
-	<link rel="stylesheet" href="css/comments.css">
-	<link href="css/base.css" rel="stylesheet">
-	<link href="css/index.css" rel="stylesheet">
-	<link href="css/m.css" rel="stylesheet">
-	<script src="js/jquery.min.js" type="text/javascript"></script>
-	<script src="js/jquery.easyfader.min.js"></script>
-	<script src="js/scrollReveal.js"></script>
-	<script src="js/wangEditor.js"></script>
-	<script src="js/common.js"></script>
-	<script src="js/xcConfirm.js"></script>
+	<link rel="shortcut icon" href="/static/images/bitbug_favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="/static/css/comments.css">
+	<link href="/static/css/base.css" rel="stylesheet">
+	<link href="/static/css/index.css" rel="stylesheet">
+	<link href="/static/css/m.css" rel="stylesheet">
+	<script src="/static/js/jquery.min.js" type="text/javascript"></script>
+	<script src="/static/js/jquery.easyfader.min.js"></script>
+	<script src="/static/js/scrollReveal.js"></script>
+	<script src="/static/js/wangEditor.js"></script>
+	<script src="/static/js/common.js"></script>
+	<script src="/static/js/xcConfirm.js"></script>
 </head>
 
 <body style="position:relative">
@@ -101,7 +101,7 @@
 								</span>
 							</div>
 							<div>
-								<img alt='' src='images/02.jpg' class='commentAvatar avatar-32 commentPhoto' height='32' width='32' />
+								<img alt='' src='/static/images/02.jpg' class='commentAvatar avatar-32 commentPhoto' height='32' width='32' />
 							</div>
 							<div class="body">
 								<p>写的很好，长得很帅</p>
@@ -126,7 +126,7 @@
 						<li>
 							<div class="top"><a href='#'  class='url'>qudaodao</a><span class="time"> @
 									<a href="#" title="">2018-09-10 9:38</a><a href="#" class="replyComment">回复</a></span></div>
-							<div><img alt='' src='images/01.jpg' class='commentAvatar avatar-32 commentPhoto' height='32' width='32' /></div>
+							<div><img alt='' src='/static/images/01.jpg' class='commentAvatar avatar-32 commentPhoto' height='32' width='32' /></div>
 							<div class="body">
 								<p>真知灼见</p>
 							</div>
@@ -157,7 +157,7 @@
 						<li>
 							<div class="top"><a href='#' rel='external nofollow' class='url'>qudaodao</a><span class="time"> @
 									<a href="#" title="">2018-09-10 9:38</a><a href="#" class="replyComment">回复</a></span></div>
-							<div><img alt='' src='images/04.jpg' class='commentAvatar avatar-32 commentPhoto' height='32' width='32' /></div>
+							<div><img alt='' src='/static/images/04.jpg' class='commentAvatar avatar-32 commentPhoto' height='32' width='32' /></div>
 							<div class="body">
 								<p>没毛病老铁</p>
 							</div>
@@ -190,23 +190,23 @@
 				<div class="tuijian">
 					<h2 class="hometitle">推荐文章</h2>
 					<ul class="tjpic">
-					  <i><img src="images/toppic01.jpg"></i>
+					  <i><img src="/static/images/toppic01.jpg"></i>
 					  <p><a href="#">python中打开TXT文件报错</a></p>
 					</ul>
 					<ul class="sidenews">
-					  <li> <i><img src="images/toppic01.jpg"></i>
+					  <li> <i><img src="/static/images/toppic01.jpg"></i>
 						<p><a href="#">python学习网址以及笔记</a></p>
 						<span>2018-05-13</span>
 					  </li>
-					  <li> <i><img src="images/toppic02.jpg"></i>
+					  <li> <i><img src="/static/images/toppic02.jpg"></i>
 						<p><a href="#">CentOS7下python开发环境配置</a></p>
 						<span>2018-05-13</span>
 					  </li>
-					  <li> <i><img src="images/v1.jpg"></i>
+					  <li> <i><img src="/static/images/v1.jpg"></i>
 						<p><a href="#">python初步实现word2vec</a></p>
 						<span>2018-05-13</span>
 					  </li>
-					  <li> <i><img src="images/v2.jpg"></i>
+					  <li> <i><img src="/static/images/v2.jpg"></i>
 						<p><a href="#">Python之if判断语句与while和for循环</a></p>
 						<span>2018-05-13</span>
 					  </li>
@@ -229,25 +229,19 @@
 						<a href="#">索尼</a>
 					</ul>
 				</div>
-				<div class="guanzhu" id="follow-us">
-					<h2 class="hometitle">关注我们 么么哒！</h2>
-					<ul>
-						<li class="sina"><a href="#" target="_blank"><span>微信公众号</span>达内</a></li>
-						<li class="tencent"><a href="#" target="_blank"><span>微信咨询</span>XXX</a></li>
-						<li class="qq"><a href="#" target="_blank"><span>QQ号</span>XXXXXX</a></li>
-						<li class="email"><a href="#" target="_blank"><span>邮箱帐号</span>tedu.cn</a></li>
-						<li class="wxgzh"><a href="#" target="_blank"><span>咨询电话</span>xxxxxxxxxxx</a></li>
-					</ul>
-				</div>
+
+				{% include 'followus.html' %}
+				
 			</div>
 		</div>
 	</article>
 
-	<footer id="footer">
-		<p>Design by <a href=# target="_blank">皮爷の博客</a> <a href="#">备XXXXXXXX号-1</a></p>
-	</footer>
+<footer id="footer">
+    {% include 'footer.html' %}
+</footer>
 
-	<a href="#" class="cd-top">Top</a>
+<a href="#" class="cd-top">Top</a>
+
 	<script>
 		var E = window.wangEditor
 		var editor = new E('#editor')

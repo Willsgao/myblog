@@ -3,7 +3,9 @@
 
 <head>
   <meta charset="utf-8">
+  {% block title %}
   <title>首页_个人博客</title>
+  {% endblock %}
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="/static/images/bitbug_favicon.ico" type="image/x-icon" />
   <link href="/static/css/base.css" rel="stylesheet">
@@ -13,62 +15,20 @@
   <script src="/static/js/jquery.easyfader.min.js"></script>
   <script src="/static/js/scrollReveal.js"></script>
   <script src="/static/js/common.js"></script>
+  {% block css %}
+  {% endblock %}
 </head>
 
 <body>
-  <header id="header">
-    <!--menu begin-->
-    <div class="menu">
-      <nav class="nav" id="topnav">
-        <h1 class="logo"><a href="index.html">个人博客</a></h1>
-        <li><a href="index.html">网站首页</a> </li>
-        <li><a href="list.html">文章列表</a>
-          <ul class="sub-nav">
-            <li><a href="list.html">Python</a></li>
-            <li><a href="list.html">python Web</a></li>
-            <li><a href="list.html">爬虫</a></li>
-            <li><a href="list.html">人工智能</a></li>
-            <li><a href="list.html">JS实例索引</a></li>
-          </ul>
-        </li>
-        <li><a href="photo.html">我的相册</a>
-        </li>
-        <li><a href="time.html">时间轴</a> </li>
-        <li><a href="gbook.html">留言</a> </li>
-        <li><a href="about.html">关于我</a> </li>
-        <li><a href="release.html">发表博客</a></li>
-      </nav>
-    </div>
-    <a href="login.html" id="login" target="_blank">登录</a>
-    <a href="register.html" id="register" target="_blank">注册</a>
-    <!--menu end-->
-    <!--mnav begin-->
-    <div id="mnav">
-      <h2><a href="index.html" class="mlogo">个人博客</a><span class="navicon"></span></h2>
-      <dl class="list_dl">
-        <dt class="list_dt"> <a href="index.html">网站首页</a> </dt>
-        <dt class="list_dt"> <a href="#">文章列表</a> </dt>
-        <dd class="list_dd">
-          <ul>
-            <li><a href="list.html">Python</a></li>
-            <li><a href="list.html">python Web</a></li>
-            <li><a href="list.html">爬虫</a></li>
-            <li><a href="list.html">人工智能</a></li>
-            <li><a href="list.html">JS实例索引</a></li>
-          </ul>
-        </dd>
-        <dt class="list_dt"> <a href="photo.html">我的相册</a> </dt>
-        <dt class="list_dt"> <a href="time.html">时间轴</a> </dt>
-        <dt class="list_dt"> <a href="gbook.html">留言</a> </dt>
-        <dt class="list_dt"> <a href="about.html">关于我</a> </dt>
-      </dl>
-    </div>
-    <!--mnav end-->
 
+{% include 'header.html' %}
 
-  </header>
+{% block pagebg %}
+{% endblock %}
+
   <article>
     <!--banner begin-->
+    {% block picsbox %}
     <div class="picsbox">
       <div class="banner">
         <div id="banner" class="fader">
@@ -97,6 +57,9 @@
       </div>
     </div>
     <div class="blank"></div>
+
+    {% endblock %}
+
     <!--blogsbox begin-->
     <div class="blogsbox">
       <div class="blogs" data-scroll-reveal="enter bottom over 1s">
@@ -468,22 +431,18 @@
           <li><a href="#" target="_blank">人工智能改变世界</a></li>
         </ul>
       </div>
-      <div class="guanzhu" id="follow-us">
-        <h2 class="hometitle">关注我们 么哒！</h2>
-        <ul>
-          <li class="sina"><a href="#" target="_blank"><span>微信公众号</span>达内</a></li>
-          <li class="tencent"><a href="#" target="_blank"><span>微信咨询</span>XXX</a></li>
-          <li class="qq"><a href="#" target="_blank"><span>QQ号</span>XXXXXX</a></li>
-          <li class="email"><a href="#" target="_blank"><span>邮箱帐号</span>tedu.cn</a></li>
-          <li class="wxgzh"><a href="#" target="_blank"><span>咨询电话</span>xxxxxxxxxxx</a></li>
-        </ul>
-      </div>
+
+      {% include 'followus.html' %}
+      
     </div>
   </article>
-  <footer id="footer">
-    <p>Design by <a href=# target="_blank">个人博客</a> <a href="#">备XXXXXXXXX号-1</a></p>
-  </footer>
-  <a href="#" class="cd-top">Top</a>
+
+<footer id="footer">
+    {% include 'footer.html' %}
+</footer>
+
+<a href="#" class="cd-top">Top</a>
+
 </body>
 
 </html>

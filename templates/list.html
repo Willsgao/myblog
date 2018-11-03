@@ -1,5 +1,30 @@
 {% extends 'index.html' %}
 
+{% block title %}
+<title>蜗牛行天下の博客</title>
+{% endblock %}
 
+{% block logo %}
+<h1 class="logo"><a href="index.html">皮爷の博客</a></h1>
+{% endblock %}
 
+{% block pagebg %}
+<div class="pagebg sh"></div>
+{% endblock %}
 
+{% block picsbox %}
+    <h1 class="t_nav"><span>不要轻易放弃。学习成长的路上，我们长路漫漫，只因学无止境。 </span>
+      <p class="n1">文章列表</p>
+    </h1>
+{% endblock %}
+
+{% block css %}
+    <style>
+      @media screen and (min-width: 0){
+        article{
+         width:90%;
+         margin:20px auto 0;         
+        }
+      }
+    </style>
+{% endblock %}

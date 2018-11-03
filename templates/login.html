@@ -3,23 +3,23 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="css/login_reglogin.css"/>
+	<link rel="stylesheet" href="/static/css/login_reglogin.css"/>
 </head>
 <body>
 	<div class="bg">
-		<img src="images/b.jpg" alt="">
+		<img src="/static/images/b.jpg" alt="">
 	</div>
 	<div class="main">
 		<div class="header" >
 			<h1>Login!</h1>
 		</div>
 		<p></p>
-		<form action="" method="post">
+		<form action="/login" method="post">
 			<ul class="right-form">
 				<h2>Login:</h2>
 				<li><input type="text" name="username" placeholder="Username" required/></li>
 				<li><input type="password" name="password" placeholder="Password" required/></li>
-				<input type="hidden" name="source_url" value="{{ request.META.HTTP_REFERER }}">
+				<input type="hidden" name="source_url" value="{{ refurl }}">
 				<input type="submit" value="Login" >
 				<div class="clear"> </div>
 			</ul>
