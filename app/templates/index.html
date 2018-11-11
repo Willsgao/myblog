@@ -1,0 +1,211 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  {% block title %}
+  <title>首页_个人博客</title>
+  {% endblock %}
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="/static/images/bitbug_favicon.ico" type="image/x-icon" />
+  <link href="/static/css/base.css" rel="stylesheet">
+  <link href="/static/css/index.css" rel="stylesheet">
+  <link href="/static/css/m.css" rel="stylesheet">
+  <script src="/static/js/jquery.min.js" type="text/javascript"></script>
+  <script src="/static/js/overflow.js" type="text/javascript"></script>
+  <script src="/static/js/jquery.easyfader.min.js"></script>
+  <script src="/static/js/scrollReveal.js"></script>
+  <script src="/static/js/common.js"></script>
+  {% block css %}
+  {% endblock %}
+</head>
+
+<body>
+
+{% include 'header.html' %}
+
+{% block pagebg %}
+{% endblock %}
+
+  <article>
+    <!--banner begin-->
+    {% block picsbox %}
+    <div class="picsbox">
+      <div class="banner">
+        <div id="banner" class="fader">
+        {% for topic in params.topics[:3] %}
+          <li class="slide"><a href="/info?id={{topic.id}}" target="_blank"><img src="/static/{{topic.images}}"><span class="imginfo">{{topic.title}}</span></a></li>
+        {% endfor %}
+          <div class="fader_controls">
+            <div class="page prev" data-target="prev">&lsaquo;</div>
+            <div class="page next" data-target="next">&rsaquo;</div>
+            <ul class="pager_list">
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!--banner end-->
+      <div class="toppic">
+        {% for topic in params.topics[-2:] %}
+        <li> <a href="/info?id={{topic.id}}" target="_blank"> <i><img src="/static/{{topic.images}}"></i>
+            <h2>{{topic.title}}</h2>
+            <span>{{topic.category.cate_name}}</span>
+          </a> </li>
+        {% endfor %}
+      </div>     
+    </div>
+
+    <div class="blank"></div>
+
+    {% endblock %}
+
+
+    <!--blogsbox begin-->
+    <div class="blogsbox">
+      {% for topic in params.topics %}
+      <div class="blogs" data-scroll-reveal="enter bottom over 1s">
+        <h3 class="blogtitle"><a href="/info?id={{topic.id}}" target="_blank"> {{topic.title}} </a></h3>
+
+        {% if topic.images %}
+        <span 
+          {% if loop.index % 2 == 0 %}
+              class="blogpic"
+            {% else %}
+              class="bigpic"
+            {% endif %}
+        >
+          <a href="/info?id={{topic.id}}" title=""><img src="/static/{{topic.images}}" alt=""></a>
+        </span>          
+        {% endif %}
+
+        <p class="blogtext">{{topic.content}}</p>
+
+        <div class="bloginfo">
+          <ul>
+            <li class="author"><a href="/info?id={{topic.id}}">{{topic.uname}}</a></li>
+            <li class="lmname"><a href="/info?id={{topic.id}}">{{topic.category.cate_name}}</a></li>
+            <li class="timer">{{topic.pub_date.strftime('%Y-%m-%d')}}</li>
+            <li class="view"><span>{{topic.read_num}}</span>已阅读</li>
+            <li class="like">{{topic.voke_users.count()}}</li>
+          </ul>
+        </div>
+      </div>
+      {% endfor %}
+
+
+      <div class="blogs" data-scroll-reveal="enter bottom over 1s">
+        <h3 class="blogtitle"><a href="info.html" target="_blank">python3 把\u开头的unicode转中文,把str形态的unicode转中文</a></h3>
+        <p class="blogtext">python3以上取消了decode,所以你直接想st.decode(“utf-8”)的话会报str没有decode方法的错 最后贴一下解决方案 >>> print
+          (a[0].encode('utf-8').......</p>
+        <div class="bloginfo">
+          <ul>
+            <li class="author"><a href="info.html">皮皮璐</a></li>
+            <li class="lmname"><a href="info.html">学无止境</a></li>
+            <li class="timer">2018-5-13</li>
+            <li class="view">4567已阅读</li>
+            <li class="like">9999</li>
+          </ul>
+        </div>
+      </div>
+      <div class="blogs" data-scroll-reveal="enter bottom over 1s">
+        <h3 class="blogtitle"><a href="info.html" target="_blank">python环境安装和在eclipse中插件的使用</a></h3>
+        <span class="bplist"><a href="info.html" title="">
+            <li><img src="/static/images/avatar.jpg" alt=""></li>
+            <li><img src="/static/images/bi05.jpg" alt=""></li>
+            <li><img src="/static/images/banner01.jpg" alt=""></li>
+          </a></span>
+        <p class="blogtext">目录 安装Python python for eclipse插件安装 配置PyDev插件 测试 python环境安装和python for eclipse插件安装
+          1、下载python环境和python for eclipse python环境和python for eclipse插件下载地址 在Windows命令行中使用Python 如果你想要从Windows命... </p>
+        <div class="bloginfo">
+          <ul>
+            <li class="author"><a href="info.html">皮皮璐</a></li>
+            <li class="lmname"><a href="info.html">学无止境</a></li>
+            <li class="timer">2018-5-13</li>
+            <li class="view"><span>34567</span>已阅读</li>
+            <li class="like">9999</li>
+          </ul>
+        </div>
+      </div>
+      <div class="blogs" data-scroll-reveal="enter bottom over 1s">
+        <h3 class="blogtitle"><a href="info.html" target="_blank">python初步实现word2vec!</a></h3>
+        <span class="bigpic"><a href="info.html" title=""><img src="/static/images/toppic01.jpg" alt=""></a></span>
+        <p class="blogtext">后来突然发现,我为什么要去安c语言版本的呢,我应该去用python版本的,然后就发现了gensim,安装个gensim的包就可以用word2vec了,不过gensim只实现了word2vec里面的...
+        </p>
+        <div class="bloginfo">
+          <ul>
+            <li class="author"><a href="info.html">皮皮璐</a></li>
+            <li class="lmname"><a href="info.html">学无止境</a></li>
+            <li class="timer">2018-5-13</li>
+            <li class="view"><span>34567</span>已阅读</li>
+            <li class="like">9999</li>
+          </ul>
+        </div>
+      </div>
+      <div class="blogs" data-scroll-reveal="enter bottom over 1s">
+        <h3 class="blogtitle"><a href="info.html" target="_blank">python环境安装和在eclipse中插件的使用</a></h3>
+        <p class="blogtext">目录 安装Python python for eclipse插件安装 配置PyDev插件 测试 python环境安装和python for eclipse插件安装
+          1、下载python环境和python for eclipse python环境和python for eclipse插件下载地址 在Windows命令行中使用Python 如果你想要从Windows命...</p>
+        <div class="bloginfo">
+          <ul>
+            <li class="author"><a href="info.html">皮皮璐</a></li>
+            <li class="lmname"><a href="info.html">学无止境</a></li>
+            <li class="timer">2018-5-13</li>
+            <li class="view">4567已阅读</li>
+            <li class="like">9999</li>
+          </ul>
+        </div>
+      </div>
+      <div class="blogs" data-scroll-reveal="enter bottom over 1s">
+        <h3 class="blogtitle"><a href="info.html" target="_blank">Python之if判断语句与while和for循环 </a></h3>
+        <span class="bplist"><a href="info.html" title="">
+            <li><img src="/static/images/avatar.jpg" alt=""></li>
+            <li><img src="/static/images/bi05.jpg" alt=""></li>
+            <li><img src="/static/images/banner01.jpg" alt=""></li>
+          </a></span>
+        <p class="blogtext">Python之if判断语句与while和for循环 Python之if判断语句与while和for循环 5-1 Python之if语句 5-2 Python之 if-else 5-3
+          Python之 if-elif-else 5-4 Python之 for循环 5-5 Python之 while循环 5-6 Python之 break退出循环 5-7 Python之 continue继续循环
+          5-8... </p>
+        <div class="bloginfo">
+          <ul>
+            <li class="author"><a href="info.html">皮皮璐</a></li>
+            <li class="lmname"><a href="info.html">学无止境</a></li>
+            <li class="timer">2018-5-13</li>
+            <li class="view"><span>34567</span>已阅读</li>
+            <li class="like">9999</li>
+          </ul>
+        </div>
+      </div>
+      <div class="blogs" data-scroll-reveal="enter bottom over 1s">
+        <h3 class="blogtitle"><a href="info.html" target="_blank">requests库和正则表达式之淘宝爬虫实战!</a></h3>
+        <span class="bigpic"><a href="info.html" title=""><img src="/static/images/toppic01.jpg" alt=""></a></span>
+        <p class="blogtext">使用requests库是需要安装的，requests库相比urllib
+          库来说更高级方便一点，同时与scrapy相比较还是不够强大，本文主要介绍利用requests库和正则表达式完成一项简单的爬虫小项目----淘宝商品爬虫。... </p>
+        <div class="bloginfo">
+          <ul>
+            <li class="author"><a href="info.html">皮皮璐</a></li>
+            <li class="lmname"><a href="info.html">学无止境</a></li>
+            <li class="timer">2018-5-13</li>
+            <li class="view"><span>34567</span>已阅读</li>
+            <li class="like">9999</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--blogsbox end-->
+
+
+    {% include 'sidebar.html' %}
+      
+    </div>
+  
+  </article>
+
+<footer id="footer">
+    {% include 'footer.html' %}
+</footer>
+
+<a href="#" class="cd-top">Top</a>
+
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<header id="header">
+
+    <!--menu begin-->
+    <div class="menu">
+      <nav class="nav" id="topnav">
+        <h1 class="logo"><a href="/">个人博客</a></h1>
+        <li><a href="/">网站首页</a> </li>
+        <li><a href="/list">文章列表</a>
+          <ul class="sub-nav">
+          {% for category in params.categories %}
+              <li><a href="/list?id={{category.id}}">{{category.cate_name}}</a></li>
+          {% endfor %}
+          </ul>
+        </li>
+
+        <li><a href="/photo">我的相册</a>
+        </li>
+        <li><a href="/time">时间轴</a> </li>
+        <li><a href="/gbook">留言</a> </li>
+        <li><a href="/about">关于我</a> </li>
+        <li><a href="/release">发表博客</a></li>
+      </nav>
+    </div>
+
+    {% if params.user %}
+      <a id="login">欢迎{{params.user.uname}}</a>
+      <a href="/logout" id="register" >退出</a>    
+    {% else %}
+      <a href="/login" id="login">登录</a>
+      <a href="/register" id="register">注册</a>
+    {% endif %}
+    <!--menu end-->
+
+    <!--mnav begin-->
+    <div id="mnav">
+      <h2><a href="index.html" class="mlogo">个人博客</a><span class="navicon"></span></h2>
+      <dl class="list_dl">
+        <dt class="list_dt"> <a href="/">网站首页</a> </dt>
+        <dt class="list_dt"> <a href="/list">文章列表</a> </dt>
+        <dd class="list_dd">
+          <ul>
+            {% for category in params.categories %}
+            <li><a href="/list?id={{category.id}}">{{category.cate_name}}</a></li>
+            {% endfor %}
+          </ul>
+        </dd>
+        <dt class="list_dt"> <a href="photo.html">我的相册</a> </dt>
+        <dt class="list_dt"> <a href="time.html">时间轴</a> </dt>
+        <dt class="list_dt"> <a href="gbook.html">留言</a> </dt>
+        <dt class="list_dt"> <a href="about.html">关于我</a> </dt>
+      </dl>
+    </div>
+    <!--mnav end-->
+
+  </header>
