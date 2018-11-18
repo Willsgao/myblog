@@ -14,3 +14,4 @@ def list_views():
     topics = Topic.query.filter_by(category_id=id).order_by('id desc').all()
     print(topics)
     return render_template('list.html',params=locals())
+    

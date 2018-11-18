@@ -62,17 +62,43 @@ def logout_views():
     else:
         return redirect('/login')
 
-@main.route('/info')
+@main.route('/info',methods=['GET','POST'])
 def info_views():
     # 查询所有的Category信息
     categories = Category.query.all()
     topics = Topic.query.all()
+
     # 获取登录信息
     if 'uid' in session and 'uname' in session:
     # if session['uid'] and session['uname']:
         user = User.query.filter_by(id=session.get('uid')).first()
-        print(user)
+        user_id = session.get('uid')
     tid = request.args.get('id')
-    print(tid)
-    topic = Topic.query.filter_by(id=tid).first()
+    if tid:
+        print(tid)
+        topic = Topic.query.filter_by(id=tid).first()
+        topic.read_num = int(topic.read_num)+1
+        db.session.add(topic)
+        prevtopic = Topic.query.filter(Topic.id<tid).order_by('id desc').first()
+        nexttopic = Topic.query.filter(Topic.id>tid).first()
+
+    if request.method == 'POST':
+        if user_id:
+            pass
+            # data = request.get_json()
+            # topic_id = data.get('topic_id')
+            # like = data.get('like')
+            # user_id = session['uid']
+            # if like:
+            #     topic = Topic.query.filter_by(id=topic_id).first()
+            #     user = User.query.filter_by(id=user_id).first()
+            #     # 增加多对多外键关联关系
+            #     topic.voke_users.append(user)
+            #     db.session.add(topic)
+            #     print('添加成功！')
+        else:
+            pass
+            
     return render_template('info.html',params=locals())
+
+

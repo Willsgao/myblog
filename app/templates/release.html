@@ -8,16 +8,14 @@
 	<link rel="shortcut icon" href="/static/images/bitbug_favicon.ico" type="image/x-icon" />
 	<link href="/static/css/base.css" rel="stylesheet">
 	<link href="/static/css/index.css" rel="stylesheet">
-	<link rel="stylesheet" href="css/comments.css">
+	<link rel="stylesheet" href="/static/css/comments.css">
 	<link href="/static/css/m.css" rel="stylesheet">
 	<script src="/static/js/jquery.min.js" type="text/javascript"></script>
 	<script src="/static/js/jquery.easyfader.min.js"></script>
 	<script src="/static/js/scrollReveal.js"></script>
 	<script src="/static/js/wangEditor.js"></script>
 	<script src="/static/js/common.js"></script>
-	<!--[if lt IE 9]>
-	<script src="/static/js/modernizr.js"></script>
-	<![endif]-->
+
 </head>
 
 <body>
@@ -27,10 +25,10 @@
 	<div class="pagebg re"></div>
 	<div class="container">
 		<h1 class="t_nav"><span>不要轻易放弃。学习成长的路上，我们长路漫漫，只因学无止境。 </span>
-			<p class="n1">表发博客</p>
+			<p class="n1">发表博客</p>
 		</h1>
 		<div class="infosbox">
-			<form action="#" method="post">
+			<form action="/release" method="post">
 				<br>
 				<p>
 					<input class="comment_input" id="author" maxlength="50" name="author" required="required" size="25" tabindex="1"
@@ -39,65 +37,68 @@
 				</p>
 				<br>
 				<p class="classification">
-					<input name="list" type="radio" value="1">个人博客
-					<input name="list" type="radio" value="2">公开博客
-					<input name="list" type="radio" value="3">其他博客
-				</p>
+				    {% for blogtype in params.blogtypes %}
+				        <input name="list" type="radio" value="{{blogtype.id}}" 
+				        {% if loop.first %}
+				            checked
+				        {% endif %}
+				        >{{blogtype.type_name}}
+				    {% endfor %}
 
+				    <span style="margin: 0 5px 0 20px">
+				    	文章类型
+				    </span>
+				    <select name="category" id="" style="margin: 0 15px 0 0">
+				    	{% for category in params.categories %}
+				    	    <option value="{{category.id}}">{{category.cate_name}}</option>
+				    	{% endfor %}
+				    </select>
+
+				    <input type="file" name="picture"　style="margin: 0 0 0 5px">
+				</p>
 				<br>
 
-				<div id="editor" style="margin-left: 12px;margin-right: 12px"></div>
+			    <div id="divwang1">
+			        <p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
+			    </div>
+			    <div style="display:none;">
+			    	
+			    </div>
+			    <textarea id="textwang1"  style="width:100%;height:0;display:none;" name="content"></textarea>
 				<br>
 				<p>
 					<input id="id_article" name="article" type="hidden" value="1">
-					<input name="submit" type="submit" id="submit" tabindex="5" value="提交" class="button" />
+					<input name="submit" opacity="0" type="submit" id="submit" tabindex="5" value="提交" class="button" />
 				</p>
 				<br>
 			</form>
 
 		</div>
-		<!--release end-->
-		<div class="sidebar">
-			<div class="tuijian">
-				<h2 class="hometitle">点击排行</h2>
-				<ul class="tjpic">
-					<i><img src="/static/images/toppic01.jpg"></i>
-					<p><a href="#">Python语言在人工智能(AI)中的优势</a></p>
-				</ul>
-				<ul class="sidenews">
-					<li> <i><img src="/static/images/toppic01.jpg"></i>
-						<p><a href="#">精通Python编程——Python深入浅出教程</a></p>
-						<span>2018-05-13</span>
-					</li>
-					<li> <i><img src="/static/images/toppic02.jpg"></i>
-						<p><a href="#">人生苦短 Python当歌</a></p>
-						<span>2018-05-13</span>
-					</li>
-					<li> <i><img src="/static/images/v1.jpg"></i>
-						<p><a href="#">Python学习笔记：虚拟环境和包</a></p>
-						<span>2018-05-13</span>
-					</li>
-					<li> <i><img src="/static/images/v2.jpg"></i>
-						<p><a href="#">python中打开TXT文件报错</a></p>
-						<span>2018-05-13</span>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
 
+		{% include 'sidebar.html' %}
+		
 	<footer id="footer">
 	    {% include 'footer.html' %}
 	</footer>
 
 	<a href="#" class="cd-top">Top</a>
 
-	<script>
-		var E = window.wangEditor
-		var editor = new E('#editor')
-		// 或者 var editor = new E( document.getElementById('editor') )
-		editor.create()
-	</script>
+	<!--这里引用jquery和wangEditor.js-->
+    <script type="text/javascript">
+        var E = window.wangEditor
+        var editor = new E('#divwang1')
+        var $text1 = $('#textwang1')
+        editor.customConfig.onchange = function (html) {
+            // 监控变化，同步更新到 textarea
+            $text1.val(html)
+        }
+        editor.create()
+        // 初始化 textarea 的值
+        // alert(editor.txt.html())
+        $text1.val(editor.txt.html())
+    </script>
+
+
 </body>
 
 </html>

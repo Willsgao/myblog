@@ -9,11 +9,22 @@ def release_views():
         if 'uid' in session and 'uname' in session:
             user = User.query.filter_by(id=session['uid'],\
                 uname=session['uname']).first()
+            blogtypes = BlogType.query.all()
+            categories = Category.query.all()
+            print(categories)
             if user.is_author:
-                return render_template('release.html')
+                return render_template('release.html',params=locals())
             else:
                 return redirect('/')
         else:
             return redirect('/')
     else:
-        pass
+        tilte = request.form.get('author')
+        blogtype = request.form.get('list')
+        category = request.form.get('category')
+        editor = request.form.get('article')
+        content = request.form.get('content')
+        print(tilte,blogtype,category,editor,content)
+        return '%s'%content
+
+
