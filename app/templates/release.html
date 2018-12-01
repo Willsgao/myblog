@@ -75,7 +75,10 @@
 
 		</div>
 
-		{% include 'sidebar.html' %}
+		{% extends 'sidebar.html' %}
+
+		{% block siderup %}
+		{% endblock %}
 		
 	<footer id="footer">
 	    {% include 'footer.html' %}

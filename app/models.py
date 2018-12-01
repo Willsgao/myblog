@@ -39,7 +39,6 @@ class Topic(db.Model):
         backref=db.backref('voke_users',lazy='dynamic')
         )
 
-
 class User(db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer,primary_key=True,nullable=False)
@@ -75,6 +74,7 @@ class Reply(db.Model):
     reply_time = db.Column(db.DateTime)
     user_id = db.Column(db.Integer,db.ForeignKey('user.id'))
     topic_id = db.Column(db.Integer,db.ForeignKey('topic.id'))
+    pid = db.Column(db.Integer)
 
 # 使用db.Table创建第三张关联表
 Voke = db.Table(

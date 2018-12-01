@@ -1,0 +1,222 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>首页_皮爷の博客</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" href="/static/images/bitbug_favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="/static/css/comments.css">
+	<link href="/static/css/base.css" rel="stylesheet">
+	<link href="/static/css/index.css" rel="stylesheet">
+	<link href="/static/css/m.css" rel="stylesheet">
+	<script src="/static/js/jquery.min.js" type="text/javascript"></script>
+	<script src="/static/js/jquery.easyfader.min.js"></script>
+	<script src="/static/js/jquery-1.11.3.js"></script>
+	<script src="/static/js/scrollReveal.js"></script>
+	<script src="/static/js/wangEditor.js"></script>
+	<script src="/static/js/common.js"></script>
+	<script src="/static/js/xcConfirm.js"></script>
+	<script src="/static/js/index.js"></script>
+</head>
+
+<body>
+
+{% include 'header.html' %}
+
+	<article>
+		<h1 class="t_nav">
+			<p class="n1">文章</p>
+		</h1>
+		<div class="infosbox">
+			<div class="newsview">
+				{% if params.topic %}			
+				<h3 class="news_title">{{params.topic.title}}</h3>
+				<div class="bloginfo">
+					<ul>
+						<li class="author"><a href="#">{{params.topic.user.uname}}</a></li>
+						<li class="lmname"><a href="#">{{params.topic.category.cate_name}}</a></li>
+						<li class="timer">{{params.topic.pub_date.strftime("%Y-%m-%d")}}</li>
+						<li class="view">{{params.topic.read_num}}已阅读</li>
+						<a class="avokes"><li class="like">{{params.topic.voke_users.count()}}</li></a>
+					</ul>
+				</div>
+				<div class="tags"><a href="/" target="_blank">个人博客</a> &nbsp; <a href="#" target="_blank">小世界</a></div>
+				<div class="news_about"><strong>简介</strong>{{params.topic}}</div>
+				<div class="news_con">
+					From：https://www.oschina.net/question/5189_4306<br>
+					<br>
+					From：https://www.oschina.net/question/5189_4306<br>
+					<br>
+					<img alt="" src="/static/{{params.topic.images}}"><br>
+					<br>
+					Web.py Cookbook 简体中文版：http://webpy.org/cookbook/index.zh-cn<br>
+					<br>
+					web.py 0.3 新手指南：http://webpy.org/docs/0.3/tutorial.zh-cn<br>
+					<br>
+					<img alt="" src="/static/{{params.topic.images}}"><br>
+					<br>
+					webpy 官网文档：http://webpy.org/
+
+					web.py 十分钟创建简易博客：http://blog.csdn.net/freeking101/article/details/53020728<br>
+					<br>
+					web.py 是一个Python 的web 框架，它简单而且功能强大。web.py 是公开的，无论用于什么用途都是没有限制的。而且相当的小巧，应当归属于轻量级的web 框架。但这并不影响web.py
+					的强大，而且使用起来很简单、很直接。在实际应用上，web.py 更多的是学术上的价值，因为你可以看到更多web 应用的底层，这在当今“抽象得很好”的web 框架上是学不到的 ：）
+					如果想了解更多web.py，可以访问web.py 的官方文档。
+
+					先感受一下web.py 的简单而强大：<br>
+					<br>
+					{{params.topic.content}}
+				</div>
+			</div>
+			{% endif %}
+
+			<div class="share">
+				<p class="diggit">
+					<a href="/info?id={{params.topic.id}}&like=1" 
+					 onclick="topic_zans()">
+			     <i class="topic_zan">很赞哦!</i>
+					</a> 
+					(<b id="diggnum"><span id="sp_topic_zan">{{params.topic.voke_users.count()}}</span></b>)
+				</p>
+		
+				<p class="dasbox"><a href="#" class="dashang" title="打赏，支持一下">打赏本站</a></p>
+				<div class="hide_box"></div>
+			</div>
+			<div class="nextinfo">
+			    {% if params.prevtopic %}
+				<p>上一篇：<a href="/info?id={{params.prevtopic.id}}">{{params.prevtopic.title}}</a></p>
+				{% else %}
+				<p>下一篇：<a href="/list">返回列表</a></p>
+				{% endif %}
+
+			    {% if params.nexttopic %}
+				<p>上一篇：<a href="/info?id={{params.nexttopic.id}}">{{params.nexttopic.title}}</a></p>
+				{% else %}
+				<p>下一篇：<a href="/list">返回列表</a></p>
+				{% endif %}				
+				
+			</div>
+			<div class="news_pl">
+				<h2>文章评论</h2>
+				<ul>
+					<div class="gbko">
+					    
+						<div class="l_box f_l" style="padding:20px;">
+						{% if params.topic %}
+							<div class="commentstitle">
+								<h3 id="comments">到现在<span class="commentsnumber">有{{params.topic.replies.count()}}条评论</span></h3>
+							</div>
+						{% endif %}
+						
+							<ol class="commentlist">
+							{% if params.replies %}
+								<!--先遍历父级评论-->
+								{% for reply in params.replies %}
+								<li>
+									<div class="top"><a href='#'  class='url'>qudaodao</a>
+										<span class="time"> @
+											<a href="#" title="">{{reply.reply_time}}</a>
+											<a href="#" class="replyComment">回复</a>
+										</span>
+									</div>
+									<div><img alt='' src='/static/images/02.jpg' class='commentAvatar avatar-32 commentPhoto' height='32' width='32' /></div>
+									<div class="body">
+										<p>{{reply.content}}</p>
+									</div>
+								</li>
+								{% endfor %}
+								<!--如果父级评论有子评论，就把子评论输出-->
+								<li>
+									<div class="reply">
+										<div class="top">
+											<a href="#" class="url">pipilu</a>
+											<span class="time">
+												@ <a href="#" title="">2018-09-10 9:38</a>
+											</span>
+										</div>
+										<div><img alt="" src="/static/images/01.jpg" class="commentAvatar avatar-32 commentPhoto" height="32" width="32"></div>
+										<div class="body">楼上说的对</div>
+									</div>
+								</li>
+							{% endif %}
+							</ol>
+
+							
+							<div id="commentform">
+								<h3 id="respond">在这添加你的留言！</h3>
+								<form action="/info?id={{params.topic.id}}" method="post">
+			    <div id="editor" >
+			       <!--  <p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p> -->
+			    </div>
+			    <textarea id="textwang1"  style="width:100%;height:0;display:none;" name="content"></textarea>
+				<br>
+						<p>
+							<input id="id_article" name="article" type="hidden" value="1">
+							<input name="submit" opacity="0" type="submit" id="submit" tabindex="5" value="提交" class="button" />
+						</p>
+						<br>
+								</form>
+							</div>
+						</div>
+
+					</div>
+				</ul>
+			</div>
+		</div>
+
+		{% include 'sidebar.html' %}
+
+	</article>
+
+	<footer id="footer">
+	    {% include 'footer.html' %}
+	</footer>
+
+	<a href="#" class="cd-top">Top</a>
+	<script>
+	
+		// function Editor(){
+		var E = window.wangEditor
+        var editor = new E('#editor')
+        var $text1 = $('#textwang1')
+        editor.customConfig.menus = [
+		'head', // 标题
+		'bold', // 粗体
+		'fontSize', // 字号
+		'fontName', // 字体
+		'italic', // 斜体
+		'underline', // 下划线
+		'strikeThrough', // 删除线
+		'foreColor', // 文字颜色
+		'backColor', // 背景颜色
+		'link', // 插入链接
+		'list', // 列表
+		'justify', // 对齐方式
+		'quote', // 引用
+		'emoticon', // 表情
+		'image', // 插入图片
+		'table', // 表格
+		'video', // 插入视频
+		'undo', // 撤销
+		'redo' // 重复
+	]
+        editor.customConfig.onchange = function (html) {
+            // 监控变化，同步更新到 textarea
+            $text1.val(html)
+        }
+        editor.create()
+        // 初始化 textarea 的值
+        // alert(editor.txt.html())
+        $text1.val(editor.txt.html())			
+		// }
+
+		// $(function(){
+		// 	Editor();
+		// 	Zans();
+		// });
+
+	</script>
+</body>
+
+</html>

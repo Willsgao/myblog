@@ -31,25 +31,22 @@ def create_app():
     from .release import release as release_blueprint
     app.register_blueprint(release_blueprint)
 
+    # 关联photos程序
+    from .photos import photos as photos_blueprint
+    app.register_blueprint(photos_blueprint)
+
+    # 关联time程序
+    from .time import time as time_blueprint
+    app.register_blueprint(time_blueprint)
+
+    #　关联gbook程序
+    from .gbook import gbook as gbook_blueprint
+    app.register_blueprint(gbook_blueprint)
+
+    # 关联about程序
+    from .about import about as about_blueprint
+    app.register_blueprint(about_blueprint)
+
 
     return app    
 
-# {overflow: 
-#   hidden; margin-bottom: 20px; padding: 20px; background: FFF;\
-#  -webkit-box-shadow: 0 2px 5px 0 rgba(146, 146, 146, .1);\
-#  -moz-box-shadow: 0 2px 5px 0 rgba(146, 146, 146, .1);\
-#   box-shadow: 0 2px 5px 0 rgba(146, 146, 146, .1); \
-#   -webkit-transition: all 0.6s ease; -moz-transition: all 0.6s ease; \
-#   -o-transition: all 0.6s ease; transition: all 0.6s ease; }
-
-# {
-#     white-space: nowrap; 
-#     overflow: hidden;
-#     display: -webkit-box;
-#     text-overflow: ellipsis;
-#     -webkit-line-clamp: 1;
-#     display: -moz-box;
-#     display:block;
-#     -webkit-box-orient: vertical;
-#     -moz-box-orient: vertical;
-# }

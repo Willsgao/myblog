@@ -23,13 +23,43 @@ $(document).ready(function () {
         i.addEventListener("click", function (ev) {
             ev.preventDefault();
             var txt=  "请输入回复：";
+            var user_pid = $(this).context.attributes.value.value
+            console.log(typeof user_pid);
+            var topic_id = $(this).context.firstElementChild.attributes.value.value
+            console.log(topic_id);
+
             window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.input,{
                 onOk:function(reply){
                     console.log(reply);
+                    console.log('reply');
+                    console.log($(this));
+                    console.log('reply');
+                    console.log(user_pid);
+                    console.log('reply');
+                    
+                    $.post('/info?id='+topic_id,{
+                        'reply':reply,
+                        'user_pid':user_pid
+                    },function(data){
+                        // console.log(data)
+                    },'json');
                 }
             });
         }, false);
     }
+
+    //  删除留言评论
+    $('.deleteReply').click(function(){
+        if(confirm('确实要删除么？')){
+            var reply_id = $(this).val()
+            console.log(reply_id)
+            $.post('/info?id='+topic_id,{
+                'reply_id':reply_id
+            },function(data){
+                // console.log(data)
+            },'json');         
+        }
+    })
 
     /*nav show or hide*/
     $('.nav>li').hover(function () {
